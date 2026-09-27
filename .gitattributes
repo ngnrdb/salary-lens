@@ -1,0 +1,4 @@
+# Normalize line endings so the extension behaves the same from Windows, macOS and Linux clones
+* text=auto eol=lf
+*.png binary
+*.sh text eol=lf

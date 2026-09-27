@@ -1,0 +1,27 @@
+# Build output
+dist/
+*.zip
+*.crx
+*.pem
+
+# Dependencies (none today, but keep them out if added later)
+node_modules/
+
+# Secrets and local config: never commit an API key
+.env
+.env.*
+*.key
+secrets.*
+
+# Editors and OS files
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*

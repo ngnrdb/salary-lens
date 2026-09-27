@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salary Lens settings</title>
+<link rel="stylesheet" href="options.css">
+</head>
+<body>
+<main class="wrap">
+  <header class="head">
+    <div class="logo" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+    </div>
+    <h1>Salary Lens</h1>
+  </header>
+
+  <section id="welcome" class="welcome" hidden>
+    <h2>Welcome! One step to get started</h2>
+    <p>Salary Lens shows the expected salary on job pages. Salaries listed on a posting show up right away. For a market estimate with sources, add your own Gemini API key below. It's stored only in this browser.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Gemini API key</h2>
+    <ol class="steps">
+      <li>Open <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">Google AI Studio</a> and create an API key.</li>
+      <li>Paste it below and select <strong>Save and test</strong>.</li>
+    </ol>
+    <div class="field">
+      <label for="apiKey">API key</label>
+      <div class="row">
+        <input id="apiKey" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your Gemini API key">
+        <button id="toggleKey" type="button" class="btn ghost" aria-pressed="false">Show</button>
+      </div>
+    </div>
+    <div class="row">
+      <button id="saveKey" type="button" class="btn solid">Save and test</button>
+      <button id="removeKey" type="button" class="btn ghost">Remove key</button>
+    </div>
+    <p id="keyStatus" class="status" role="status" aria-live="polite"></p>
+    <div class="safety">
+      <h3>Keep your key safe</h3>
+      <ul>
+        <li>Salary Lens will never ask for your key on a website. Only paste it on this settings page.</li>
+        <li>In <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener noreferrer">Google Cloud credentials</a>, restrict the key to the <strong>Generative Language API</strong> only, so it's useless for anything else if it leaks.</li>
+        <li>If billing is on, set a <a href="https://console.cloud.google.com/billing/budgets" target="_blank" rel="noopener noreferrer">budget alert</a> for peace of mind.</li>
+        <li>Think your key leaked? Delete it in Google AI Studio and create a new one.</li>
+      </ul>
+    </div>
+    <p class="hint">Live Google Search lookups with source links need a key with billing turned on in Google Cloud (Google includes a monthly allowance of free searches). Free keys still work, with AI-only estimates that are labelled as such.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Lookups</h2>
+    <div class="check">
+      <input id="autoFetch" type="checkbox">
+      <label for="autoFetch">Look up the salary automatically when I open a job</label>
+    </div>
+    <p class="hint indent">When off, click the badge next to the job title to look it up. This saves quota while you browse.</p>
+    <div class="check">
+      <input id="useSearch" type="checkbox">
+      <label for="useSearch">Use Google Search for live salary data</label>
+    </div>
+    <fieldset class="field">
+      <legend>Show amounts</legend>
+      <div class="radios">
+        <div class="check"><input id="unitYear" name="unit" type="radio" value="year"><label for="unitYear">Per year (LPA for India)</label></div>
+        <div class="check"><input id="unitMonth" name="unit" type="radio" value="month"><label for="unitMonth">Per month</label></div>
+      </div>
+    </fieldset>
+    <div class="field">
+      <label for="dailyLimit">Daily lookup limit</label>
+      <input id="dailyLimit" type="number" min="1" max="10000" step="1" inputmode="numeric">
+      <p class="hint">Salary Lens stops calling Gemini after this many lookups in 24 hours (and after 6 a minute or 30 an hour), so no page can run up your bill. Saved lookups don't count.</p>
+    </div>
+    <div class="field">
+      <label for="model">Gemini model</label>
+      <input id="model" type="text" list="models" spellcheck="false">
+      <datalist id="models"></datalist>
+      <p class="hint">A Flash model is fast and cheap. Change this if Google retires the model.</p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Saved lookups</h2>
+    <p class="hint">Estimates are kept for 7 days so reopening a job doesn't use quota.</p>
+    <div class="row">
+      <button id="clearCache" type="button" class="btn ghost">Clear saved lookups</button>
+      <span id="cacheStatus" class="status" role="status" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Privacy</h2>
+    <p>When you look up a salary, Salary Lens sends the job title, company, location, experience and any listed salary to Google's Gemini API, using your key. Nothing is sent to the makers of Salary Lens, and there are no analytics. Your key and saved lookups stay in this browser.</p>
+  </section>
+</main>
+<script type="module" src="options.js"></script>
+</body>
+</html>
